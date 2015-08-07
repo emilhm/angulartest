@@ -1,0 +1,39 @@
+/* Global Styles */
+
+html, body {
+    height: 100%;
+    text-align: center;
+}
+
+body {
+
+}
+
+.header{
+	background: black;
+	text-align: center;
+	width: 100%;
+	min-height: 100px;
+	vertical-align: center;
+}
+
+.carousel{
+	width: 90%;
+	float: center;
+}
+
+.list{
+	background-color: #A300AD;
+	border: 1px #000000;
+	min-height: 100px;
+	padding-bottom: 5px;
+}
+
+.precio{
+	background-color: black;
+	width: 35%;
+	min-width: 100px;
+	float: right;
+	min-height: 0px;
+
+} 
