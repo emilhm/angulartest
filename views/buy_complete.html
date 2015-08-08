@@ -1,0 +1,23 @@
+<br>
+<a style="padding-left:5%;" href="#/home">< Home</a>
+
+<div id ="list">
+  <h1 style="color:black;" align="center">lista de libros comprados</h1>
+  <table align="center"  width="90%"  ng-repeat="items in compra " > 
+    <tr class="list">
+      <td align="center" width="5%"> {{ $index + 1 }} </td>
+      <td width="10%"> <img ng-src="./{{ items.image }}"> </td>
+      <td width="75%"> {{ items.titleItem }}<br>   {{ items.artistName }} </td>
+      <td width="20%"> ${{ formato(items.price); }} </td>
+    </tr>
+  </table>
+</div>
+<div id="precio">
+  <table align="center"  width="90%" > 
+    <tr>
+      <td align="center" width="50%"> {{ items.titleItem }}<br>   {{ items.artistName }} </td>
+      <td align="center" class="precio" width="50%">  El Total es: ${{ formato(precio()); }} </td>
+    </tr>
+  </table>
+   
+</div>

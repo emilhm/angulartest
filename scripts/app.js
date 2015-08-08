@@ -7,7 +7,7 @@
  * Main AngularJS Web Application
  */
 var app = angular.module('testAngularWebApp', [
-  'ngRoute'
+  'ngRoute','ngCookies'
 ]);
 
 /**
@@ -30,38 +30,28 @@ app.config(['$routeProvider', function ($routeProvider) {
 	    }
 ]);
 
-app.controller('homecontroler', function($scope, $http) {
-  $http.get("../api/buytable.json")
-  .success(function (data) 
-  	{
-  		$scope.buytable = data.buyTable;
-  	});
+function formato_numero(numero, decimales, separador_decimal, separador_miles){ // v2007-08-06
+    numero=parseFloat(numero);
+    if(isNaN(numero)){
+        return "";
+    }
 
-  	$scope.precio = function (){
-		      var precio = 0;
-		      angular.forEach($scope.buytable, function(result) {
-		      	precio += parseFloat(result.price);
-		        console.log(result.price);
-		      });
-		      return precio;
-		    };
+    if(decimales!==undefined){
+        // Redondeamos
+        numero=numero.toFixed(decimales);
+    }
 
-  	$scope.remove = function (index) {
+    // Convertimos el punto en separador_decimal
+    numero=numero.toString().replace(".", separador_decimal!==undefined ? separador_decimal : ",");
 
-  		$scope.buytable.splice(index,1);
-  		
-  	}
-});
+    if(separador_miles){
+        // Añadimos los separadores de miles
+        var miles=new RegExp("(-?[0-9]+)([0-9]{3})");
+        while(miles.test(numero)) {
+            numero=numero.replace(miles, "$1" + separador_miles + "$2");
+        }
+    }
 
-app.controller('buycontroler', function($scope, $http) {
-  $http.get("../api/buytable.json")
+    return numero;
+}
 
-  	$scope.precio = function (){
-		      var precio = 0;
-		      angular.forEach($scope.buytable, function(result) {
-		      	precio += parseFloat(result.price);
-		        console.log(result.price);
-		      });
-		      return precio;
-		    };
-});
